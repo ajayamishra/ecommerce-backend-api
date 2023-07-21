@@ -16,15 +16,15 @@ import { authenticationMiddleware, isAdmin } from '../middlewares/authentication
 
 const router = express.Router()
 
-router.get('/api/v1/users', getAllUser)
-router.get('/api/v1/users/:id', authenticationMiddleware, isAdmin, getSingleUser)
-router.post('/api/v1/register', registerUser)
-router.post('/api/v1/login', loginUser)
-router.get('/api/v1/logout', logoutUser)
-router.delete('/api/v1/users/:id', deleteUser)
-router.put('/api/v1/update-user', authenticationMiddleware, updateUser)
-router.put('/api/v1/block-user/:id', authenticationMiddleware, isAdmin, disableUser)
-router.put('/api/v1/unblock-user/:id', authenticationMiddleware, isAdmin, enableUser)
-router.get('/api/v1/refresh', handleRefreshToken)
+router.get('/users', getAllUser)
+router.get('/users/:id', authenticationMiddleware, isAdmin, getSingleUser)
+router.post('/register', registerUser)
+router.post('/login', loginUser)
+router.get('/logout', logoutUser)
+router.delete('/users/:id', deleteUser)
+router.put('/update-user', authenticationMiddleware, updateUser)
+router.put('/block-user/:id', authenticationMiddleware, isAdmin, disableUser)
+router.put('/unblock-user/:id', authenticationMiddleware, isAdmin, enableUser)
+router.get('/refresh', handleRefreshToken)
 
 export default router

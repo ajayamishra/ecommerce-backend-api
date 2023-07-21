@@ -7,6 +7,7 @@ import config from './config/app'
 import logging from './utils/logging'
 import appRoutes from './routes/app'
 import authRoutes from './routes/auth'
+import productRoutes from './routes/products'
 import { connectDB } from './db/connection'
 import { errorHandler, notFoundError } from './middlewares/errorHandler'
 
@@ -38,7 +39,8 @@ appServer.use((req: Request, res: Response, next: NextFunction) => {
 
 /** API Routes */
 appServer.use('/', appRoutes)
-appServer.use('/auth', authRoutes)
+appServer.use('/api/v1/auth', authRoutes)
+appServer.use('/api/v1/products', productRoutes)
 
 appServer.use(notFoundError)
 appServer.use(errorHandler)
