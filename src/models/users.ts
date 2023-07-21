@@ -14,6 +14,7 @@ interface UserAttributes {
   cart: any
   address: any
   wishlist: any
+  refreshToken: string
 }
 
 export interface UserDocument extends UserAttributes, Document {
@@ -67,7 +68,10 @@ const userSchema = new mongoose.Schema<UserDocument, UserModel>({
   wishlist: [{
     type: ObjectId,
     ref: 'Product'
-  }]
+  }],
+  refreshToken: {
+    type: String
+  }
 },
 {
   timestamps: true

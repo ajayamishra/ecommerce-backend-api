@@ -1,6 +1,7 @@
 import express, { NextFunction, Request, Response } from 'express'
 import bodyParser from 'body-parser'
 import http from 'http'
+import cookieParser from 'cookie-parser'
 
 import config from './config/app'
 import logging from './utils/logging'
@@ -15,6 +16,7 @@ const appServer = express()
 
 appServer.use(bodyParser.json())
 appServer.use(bodyParser.urlencoded({ extended: false }))
+appServer.use(cookieParser())
 
 /** Log the request */
 appServer.use((req: Request, res: Response, next: NextFunction) => {
