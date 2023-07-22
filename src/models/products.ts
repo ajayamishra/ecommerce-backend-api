@@ -24,6 +24,10 @@ var productSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  size: {
+    type: String,
+    enum: ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL']
+  },
   images: {
     type: Array
   },
