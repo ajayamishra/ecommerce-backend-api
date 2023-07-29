@@ -53,6 +53,6 @@ var productSchema = new mongoose.Schema({
       postedby: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
     }
   ]
-}, { timestamps: true })
+}, { timestamps: true }) 
 
 export const Product =  mongoose.model('Product', productSchema)

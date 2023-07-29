@@ -129,8 +129,7 @@ export const logoutUser = asyncHandler(async(req: Request, res: Response): Promi
     })
     res.sendStatus(204)
   }
-  console.log('userDetails=', userDetails)
-  console.log('refreshToken', refreshToken)
+
   await User.findOneAndUpdate({ refreshToken }, {
     refreshToken: ''
   })
