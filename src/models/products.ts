@@ -20,32 +20,65 @@ var productSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
-  quantity: {
-    type: Number,
-    required: true,
-  },
-  size: {
-    type: String,
-    enum: ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL']
-  },
   images: {
     type: Array
-  },
-  color: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Color'
   },
   category: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Category'
   },
-  brand: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Brand'
+  attributes: {
+    size: {
+      type: String,
+      enum: ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL']
+    },
+    color: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Color'
+    }
   },
-  soldUnits: {
-    type: Number,
-    default: 0
+  inventory: {
+    soldUnits: {
+      type: Number,
+      default: 0,
+      select: false
+    },
+    quantity: {
+      type: Number,
+      required: true,
+    }
+  },
+  manufacture_details: {
+    name: {
+      type: String,
+      default: '-'
+    },
+    modelNumber: {
+      type: Date,
+      default: '-'
+    },
+    releaseDate: {
+      type: Date,
+      default: Date.now
+    }
+  },
+  shippingDetails: {
+    weight: {
+      type: Number,
+      default: 0
+    },
+    width: {
+      type: Number,
+      default: 0
+    },
+    height: {
+      type: Number,
+      default: 0
+    },
+    depth: {
+      type: Number,
+      default: 0
+    }
   },
   ratings: [
     {
