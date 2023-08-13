@@ -7,6 +7,7 @@ import config from './config/app'
 import logging from './utils/logging'
 import appRoutes from './routes/app'
 import authRoutes from './routes/auth'
+import brandRoutes from './routes/brands'
 import categoryRoutes from './routes/categories'
 import productRoutes from './routes/products'
 import { connectDB } from './db/connection'
@@ -41,6 +42,7 @@ appServer.use((req: Request, res: Response, next: NextFunction) => {
 /** API Routes */
 appServer.use('/', appRoutes)
 appServer.use('/api/v1/auth', authRoutes)
+appServer.use('/api/v1/brands', brandRoutes)
 appServer.use('/api/v1/products', productRoutes)
 appServer.use('/api/v1/categories', categoryRoutes)
 
