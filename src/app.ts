@@ -10,6 +10,7 @@ import authRoutes from './routes/auth'
 import brandRoutes from './routes/brands'
 import categoryRoutes from './routes/categories'
 import productRoutes from './routes/products'
+import wishlistRoutes from './routes/wishlists'
 import { connectDB } from './db/connection'
 import { errorHandler, notFoundError } from './middlewares/errorHandler'
 
@@ -43,11 +44,13 @@ appServer.use((req: Request, res: Response, next: NextFunction) => {
 appServer.use('/', appRoutes)
 appServer.use('/api/v1/auth', authRoutes)
 appServer.use('/api/v1/brands', brandRoutes)
-appServer.use('/api/v1/products', productRoutes)
 appServer.use('/api/v1/categories', categoryRoutes)
+appServer.use('/api/v1/products', productRoutes)
+appServer.use('/api/v1/wishlist', wishlistRoutes)
 
 appServer.use(notFoundError)
 appServer.use(errorHandler)
+
 connectDB()
 
 const httpServer = http.createServer(appServer)

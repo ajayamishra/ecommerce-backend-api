@@ -65,10 +65,10 @@ const userSchema = new mongoose.Schema<UserDocument, UserModel>({
     type: ObjectId,
     ref: 'Address'
   }],
-  wishlist: [{
-    type: ObjectId,
-    ref: 'Product'
-  }],
+  wishlist: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Wishlist'
+  },
   refreshToken: {
     type: String
   }

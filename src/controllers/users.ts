@@ -32,7 +32,7 @@ export const getSingleUser = asyncHandler(async(req: Request, res: Response): Pr
 })
 
 export const updateUser = asyncHandler(async(req: Request, res: Response): Promise<void> => {
-  const { _id } = req.user as { _id: string }
+  const { _id } = req.params as { _id: string }
   validateMongoDbId(_id)
 
   if (Object.keys(req.body).length === 0)  {
