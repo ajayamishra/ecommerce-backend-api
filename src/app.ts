@@ -5,12 +5,7 @@ import cookieParser from 'cookie-parser'
 
 import config from './config/app'
 import logging from './utils/logging'
-import appRoutes from './routes/app'
-import authRoutes from './routes/auth'
-import brandRoutes from './routes/brands'
-import categoryRoutes from './routes/categories'
-import productRoutes from './routes/products'
-import wishlistRoutes from './routes/wishlists'
+import registerRoutes from './routes'
 import { connectDB } from './db/connection'
 import { errorHandler, notFoundError } from './middlewares/errorHandler'
 
@@ -35,18 +30,13 @@ appServer.use((req: Request, res: Response, next: NextFunction) => {
 })
 
 /** Error handling */
-// appServer.use((req, res, next) => {
-//   const error = new Error('API Endpoint not available')
-//   res.status(404).json({  message: error.message })
-// })
+appServer.use((req, res, next) => {
+  const error = new Error('API Endpoint not available')
+  res.status(404).json({  message: error.message })
+})
 
 /** API Routes */
-appServer.use('/', appRoutes)
-appServer.use('/api/v1/auth', authRoutes)
-appServer.use('/api/v1/brands', brandRoutes)
-appServer.use('/api/v1/categories', categoryRoutes)
-appServer.use('/api/v1/products', productRoutes)
-appServer.use('/api/v1/wishlist', wishlistRoutes)
+registerRoutes(appServer)
 
 appServer.use(notFoundError)
 appServer.use(errorHandler)

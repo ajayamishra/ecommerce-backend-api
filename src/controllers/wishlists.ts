@@ -12,7 +12,7 @@ export const getAllWishlist = asyncHandler(async (req: Request, res: Response): 
   try {
     const wishlist = await Wishlist.findOne({ userId: userId }).populate('items.productId')
     res.status(200).json({ list: wishlist })
-  } catch (error) {
+  } catch (error: any) {
     throw new Error(error)
   }
 })
@@ -32,7 +32,7 @@ export const createWishlist = asyncHandler(async (req: Request, res: Response): 
     ).populate('items.productId')
 
     res.status(200).json({ wishlistDetails: wishlistDetails })
-  } catch (error) {
+  } catch (error: any) {
     throw new Error(error)
   }
 })
@@ -57,7 +57,7 @@ export const updateWishlist = asyncHandler(async (req: Request, res: Response): 
     ).populate('items.productId')
 
     res.status(200).json({ wishlistDetails: wishlistDetails })
-  } catch (error) {
+  } catch (error: any) {
     throw new Error(error)
   }
 })
@@ -72,7 +72,7 @@ export const deleteWishlist = asyncHandler(async(req: Request, res: Response): P
   try {
     const wishlistDetails = await Wishlist.findOneAndDelete({ userId: userId })
     res.status(200).json({ wishlistDetails: wishlistDetails })
-  } catch (error) {
+  } catch (error: any) {
     throw new Error(error)
   }
 })
