@@ -30,10 +30,10 @@ appServer.use((req: Request, res: Response, next: NextFunction) => {
 })
 
 /** Error handling */
-appServer.use((req, res, next) => {
-  const error = new Error('API Endpoint not available')
-  res.status(404).json({  message: error.message })
-})
+// appServer.use((req, res, next) => {
+//   const error = new Error('API Endpoint not available')
+//   res.status(404).json({  message: error.message })
+// })
 
 /** API Routes */
 registerRoutes(appServer)
