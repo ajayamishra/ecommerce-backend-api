@@ -1,11 +1,25 @@
 import { Request, Response } from 'express'
 import asyncHandler from 'express-async-handler'
+import { validationResult } from 'express-validator'
 
 import { Review } from '../models/reviews'
 import { validateMongoDbId } from '../utils/validateMongoDbId'
 
 export const createReview = asyncHandler(async (req: Request, res: Response): Promise<void> => {
-  res.status(200).json({ message: 'Review Created' })
+  const errors = validationResult(req)
+
+  if (!errors.isEmpty()) {
+    const validationErrors = errors.array().map((error: any) => error.msg)
+    res.status(400).json({ errors: validationErrors })
+  }
+
+  try {
+    const newReview = new Review(req.body)
+    const savedReview = await newReview.save()
+    res.status(201).json({ review: savedReview })
+  } catch (err) {
+    res.status(400).json({ error: err.message })
+  }
 })
 
 export const deleteReview = asyncHandler(async (req: Request, res: Response): Promise<void> => {
@@ -30,7 +44,7 @@ export const getAllReviewsByProductId = asyncHandler(async (req: Request, res: R
     const sort: { [key: string]: 'asc' | 'desc' } = {}
     sort[sortFieldName] = sortingOrder as 'asc' | 'desc'
     
-    const totalReviewsCount = await Review.countDocuments({ productId: productId });
+    const totalReviewsCount = await Review.countDocuments({ productId: productId })
     const productReviews = await Review.find({ productId: productId })
       .skip(skip)
       .limit(parseInt(limit))
