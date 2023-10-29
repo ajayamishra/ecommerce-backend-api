@@ -61,5 +61,26 @@ export const getAllReviewsByProductId = asyncHandler(async (req: Request, res: R
 })
 
 export const updateReview = asyncHandler(async (req: Request, res: Response): Promise<void> => {
-  res.status(200).json({ message: 'Review Updated' })
+  const errors = validationResult(req)
+
+  if (!errors.isEmpty()) {
+    const validationErrors = errors.array().map((error: any) => error.msg)
+    res.status(400).json({ errors: validationErrors })
+  }
+
+  try {
+    const updatedReview = await Review.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    )
+
+    if (!updatedReview) {
+      res.status(404).json({ error: 'Review not found' })
+    }
+
+    res.json({ review: updatedReview })
+  } catch (err) {
+    res.status(400).json({ error: err.message })
+  }
 })
